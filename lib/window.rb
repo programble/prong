@@ -30,7 +30,7 @@ class GameWindow < Gosu::Window
     frame_start = Time.new
     
     @debug_font.draw("(#{@ball.x.round},#{@ball.y.round}) angle: #{@ball.angle} speed: #{@ball.speed.round(2)}", 0, 0, ZOrder::DEBUG, 1.0, 1.0, Gosu::Color::GREEN)
-    @debug_font.draw("#{@framerate.ceil} FPS", 0, 20, ZOrder::DEBUG, 1.0, 1.0, Gosu::Color::GREEN)
+    @debug_font.draw("#{@framerate.round} FPS", 0, 20, ZOrder::DEBUG, 1.0, 1.0, Gosu::Color::GREEN)
     
     # Background
     draw_quad(0, 0, Gosu::Color::BLACK, width, 0, Gosu::Color::BLACK, 0, height, Gosu::Color::BLACK, width, height, Gosu::Color::BLACK, ZOrder::BACKGROUND)
