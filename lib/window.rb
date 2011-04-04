@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__)))
 require 'zorder'
 require 'ball'
+require 'paddle'
 
 require 'gosu'
 
@@ -19,11 +20,16 @@ class GameWindow < Gosu::Window
     @ball.speed = 1.0
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
+    
+    @player_paddle = Paddle.new(self, 10, 50, 0.5)
+    @player_paddle.warp(20, height / 2)
   end
 
   def update
     @ball.move
     @ball.speed += 0.01
+    @player_paddle.destination = mouse_y
+    @player_paddle.move
   end
 
   def draw
@@ -39,6 +45,7 @@ class GameWindow < Gosu::Window
     @fps_font.draw(fps, width - @fps_font.text_width(fps), 0, ZOrder::FPS, 1.0, 1.0, Gosu::Color::WHITE)
     
     @ball.draw
+    @player_paddle.draw
     
     @framerate = 60 / (Time.new - frame_start) / 1000 if @frames % @framerate.ceil == 0
   end
