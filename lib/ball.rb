@@ -5,11 +5,12 @@ require 'gosu'
 
 class Ball
   attr_accessor :angle, :speed
-  attr_reader :x, :y
+  attr_reader :x, :y, :width, :height
 
-  def initialize(window)
+  def initialize(window, width, height)
     @window = window
     @x = @y = @angle = @speed = 0
+    @width, @height = width, height
   end
   
   def warp(x, y)
@@ -30,7 +31,27 @@ class Ball
   
   def draw
     @window.rotate(@angle, @x, @y) do
-      @window.draw_quad(@x - 5, @y - 5, Gosu::Color::WHITE, @x + 5, @y - 5, Gosu::Color::WHITE, @x + 5, @y + 5, Gosu::Color::WHITE, @x - 5, @y + 5, Gosu::Color::WHITE, ZOrder::BALL)
+      @window.translate(@x, @y) do
+        hw, hh = @width / 2.0, @height / 2.0
+        # Ball
+        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, hw, -hh, Gosu::Color::WHITE, hw, hh, Gosu::Color::WHITE, -hw, hh, Gosu::Color::WHITE, ZOrder::BALL)
+        # Top Glow
+        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, -hw, -@height, Gosu::Color::NONE, hw, -@height, Gosu::Color::NONE, hw, -hh, Gosu::Color::WHITE, ZOrder::BALL_GLOW)
+        # Right Glow
+        @window.draw_quad(hw, -hh, Gosu::Color::WHITE, @width, -hh, Gosu::Color::NONE, @width, hh, Gosu::Color::NONE, hw, hh, Gosu::Color::WHITE, ZOrder::BALL_GLOW)
+        # Bottom Glow
+        @window.draw_quad(-hw, hh, Gosu::Color::WHITE, hw, hh, Gosu::Color::WHITE, hw, @height, Gosu::Color::NONE, -hw, @height, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        # Left Glow
+        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, -hw, hh, Gosu::Color::WHITE, -@width, hh, Gosu::Color::NONE, -@width, -hh, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        # Top/Right Glow
+        @window.draw_triangle(hw, -hh, Gosu::Color::WHITE, hw, -@height, Gosu::Color::NONE, @width, -hh, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        # Bottom/Right Glow
+        @window.draw_triangle(hw, hh, Gosu::Color::WHITE, @width, hh, Gosu::Color::NONE, hw, @height, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        # Bottom/Left Glow
+        @window.draw_triangle(-hw, hh, Gosu::Color::WHITE, -hw, @height, Gosu::Color::NONE, -@width, hh, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        # Top/Left Glow
+        @window.draw_triangle(-hw, -hh, Gosu::Color::WHITE, -@width, -hh, Gosu::Color::NONE, -hw, -@height, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+      end
     end
   end
 end

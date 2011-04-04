@@ -11,8 +11,8 @@ class GameWindow < Gosu::Window
     
     @debug_font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     
-    @ball = Ball.new(self)
-    @ball.speed = 4.0
+    @ball = Ball.new(self, 10, 10)
+    @ball.speed = 1.0
     @ball.angle = 0
     @ball.warp(width / 2.0, height / 2.0)
   end
