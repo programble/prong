@@ -22,9 +22,7 @@ class Ball
     @y += Gosu::offset_y(@angle, @speed)
     
     # Top/Bottom collision
-    if Gosu::distance(@x, @y, @x, 0) <= @speed
-      @angle = 180 - @angle
-    elsif Gosu::distance(@x, @y, @x, @window.height) <= @speed
+    if Gosu::distance(@x, @y, @x, 0) <= @speed || Gosu::distance(@x, @y, @x, @window.height) <= @speed
       @angle = 180 - @angle
     end
   end
