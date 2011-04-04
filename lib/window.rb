@@ -21,7 +21,7 @@ class GameWindow < Gosu::Window
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
     
-    @player_paddle = Paddle.new(self, 10, 50, 0.5)
+    @player_paddle = Paddle.new(self, 10, 60, 0.5)
     @player_paddle.warp(20, height / 2)
   end
 
