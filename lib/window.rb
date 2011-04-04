@@ -3,6 +3,7 @@ require 'zorder'
 require 'ball'
 require 'paddle'
 
+require 'rubygems'
 require 'gosu'
 
 class GameWindow < Gosu::Window
