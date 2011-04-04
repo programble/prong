@@ -32,6 +32,10 @@ class Ball < Rectangle
     if Gosu::distance(@x, @y, @x, 0) <= @speed || Gosu::distance(@x, @y, @x, @window.height) <= @speed
       @angle = 180 - @angle
     end
+    # FIXME: Remove Testing Code
+    if Gosu::distance(@x, @y, 0, @y) <= @speed || Gosu::distance(@x, @y, @window.width, @y) <= @speed
+      @angle = 360 - @angle
+    end
   end
   
   def draw

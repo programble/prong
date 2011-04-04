@@ -16,7 +16,7 @@ class GameWindow < Gosu::Window
     
     @ball = Ball.new(self, 10, 10)
     @ball.speed = 1.0
-    @ball.angle = 0
+    @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
   end
 
