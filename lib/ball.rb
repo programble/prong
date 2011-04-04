@@ -16,6 +16,7 @@ class Ball < Rectangle
   def move
     blur = Rectangle.new(@window, @width, @height, @color, ZOrder::BALL_BLUR, true, ZOrder::BALL_BLUR_GLOW)
     blur.warp(@x, @y)
+    blur.angle = @angle
     @blurs.unshift(blur)
     @blurs = @blurs[0..5]
     @blurs.each do |x|
