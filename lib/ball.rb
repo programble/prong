@@ -4,13 +4,24 @@ require 'zorder'
 
 require 'gosu'
 
+class DropArray < Array
+  def initialize(max)
+    @max = max
+  end
+  
+  def unshift(obj)
+    pop if length == @max
+    super(obj)
+  end
+end
+
 class Ball < Rectangle
   attr_accessor :angle, :speed
   attr_reader :x, :y, :width, :height
 
   def initialize(window, width, height)
     super(window, width, height, Gosu::Color::WHITE, ZOrder::BALL, true, ZOrder::BALL_GLOW)
-    @blurs = []
+    @blurs = DropArray.new(4)
   end
   
   def move
@@ -18,7 +29,6 @@ class Ball < Rectangle
     blur.warp(@x, @y)
     blur.angle = @angle
     @blurs.unshift(blur)
-    @blurs = @blurs[0..5]
     @blurs.each do |x|
       new_alpha = x.color.alpha - 60
       new_alpha < 0 && new_alpha = 0
