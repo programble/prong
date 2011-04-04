@@ -1,7 +1,7 @@
 require 'gosu'
 
 class Rectangle
-  attr_accessor :angle
+  attr_accessor :angle, :color
   attr_reader :x, :y, :width, :height
   
   def initialize(window, width, height, color, zorder, glow, glow_zorder)
