@@ -24,7 +24,7 @@ class Ball < Rectangle
     @blurs = DropArray.new(4)
   end
   
-  def move
+  def move(paddles)
     blur = Rectangle.new(@window, @width, @height, @color, ZOrder::BALL_BLUR, true, ZOrder::BALL_BLUR_GLOW)
     blur.warp(@x, @y)
     blur.angle = @angle
@@ -45,6 +45,13 @@ class Ball < Rectangle
     # FIXME: Remove Testing Code
     if Gosu::distance(@x, @y, 0, @y) <= @speed || Gosu::distance(@x, @y, @window.width, @y) <= @speed
       @angle = 360 - @angle
+    end
+    
+    # Collide with paddles
+    paddles.each do |paddle|
+      if @y > paddle.y - paddle.height / 2 && @y < paddle.y + paddle.height / 2 && Gosu::distance(@x, @y, paddle.x, @y) <= @speed
+        @angle = 360 - @angle
+      end
     end
   end
   

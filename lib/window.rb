@@ -17,7 +17,7 @@ class GameWindow < Gosu::Window
     @framerate = self.update_interval
     
     @ball = Ball.new(self, 10, 10)
-    @ball.speed = 1.0
+    @ball.speed = 2.0
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
     
@@ -26,8 +26,8 @@ class GameWindow < Gosu::Window
   end
 
   def update
-    @ball.move
-    @ball.speed += 0.01
+    @ball.move([@player_paddle])
+    #@ball.speed += 0.01
     @player_paddle.destination = mouse_y
     @player_paddle.move
   end
