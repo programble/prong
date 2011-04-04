@@ -1,5 +1,7 @@
 # Prong
 
+![](http://stillmaintained.com/programble/prong.png)
+
 A Pong clone written in Ruby using Gosu.
 
 ## Dependencies
