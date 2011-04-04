@@ -34,23 +34,55 @@ class Ball
       @window.translate(@x, @y) do
         hw, hh = @width / 2.0, @height / 2.0
         # Ball
-        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, hw, -hh, Gosu::Color::WHITE, hw, hh, Gosu::Color::WHITE, -hw, hh, Gosu::Color::WHITE, ZOrder::BALL)
+        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, 
+                          hw, -hh, Gosu::Color::WHITE, 
+                          hw, hh, Gosu::Color::WHITE, 
+                          -hw, hh, Gosu::Color::WHITE, 
+                          ZOrder::BALL)
         # Top Glow
-        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, -hw, -@height, Gosu::Color::NONE, hw, -@height, Gosu::Color::NONE, hw, -hh, Gosu::Color::WHITE, ZOrder::BALL_GLOW)
+        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, 
+                          -hw, -@height, Gosu::Color::NONE, 
+                          hw, -@height, Gosu::Color::NONE, 
+                          hw, -hh, Gosu::Color::WHITE, 
+                          ZOrder::BALL_GLOW)
         # Right Glow
-        @window.draw_quad(hw, -hh, Gosu::Color::WHITE, @width, -hh, Gosu::Color::NONE, @width, hh, Gosu::Color::NONE, hw, hh, Gosu::Color::WHITE, ZOrder::BALL_GLOW)
+        @window.draw_quad(hw, -hh, Gosu::Color::WHITE, 
+                          @width, -hh, Gosu::Color::NONE, 
+                          @width, hh, Gosu::Color::NONE, 
+                          hw, hh, Gosu::Color::WHITE, 
+                          ZOrder::BALL_GLOW)
         # Bottom Glow
-        @window.draw_quad(-hw, hh, Gosu::Color::WHITE, hw, hh, Gosu::Color::WHITE, hw, @height, Gosu::Color::NONE, -hw, @height, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        @window.draw_quad(-hw, hh, Gosu::Color::WHITE, 
+                          hw, hh, Gosu::Color::WHITE, 
+                          hw, @height, Gosu::Color::NONE, 
+                          -hw, @height, Gosu::Color::NONE, 
+                          ZOrder::BALL_GLOW)
         # Left Glow
-        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, -hw, hh, Gosu::Color::WHITE, -@width, hh, Gosu::Color::NONE, -@width, -hh, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        @window.draw_quad(-hw, -hh, Gosu::Color::WHITE, 
+                          -hw, hh, Gosu::Color::WHITE, 
+                          -@width, hh, Gosu::Color::NONE, 
+                          -@width, -hh, Gosu::Color::NONE, 
+                          ZOrder::BALL_GLOW)
         # Top/Right Glow
-        @window.draw_triangle(hw, -hh, Gosu::Color::WHITE, hw, -@height, Gosu::Color::NONE, @width, -hh, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        @window.draw_triangle(hw, -hh, Gosu::Color::WHITE, 
+                              hw, -@height, Gosu::Color::NONE, 
+                              @width, -hh, Gosu::Color::NONE, 
+                              ZOrder::BALL_GLOW)
         # Bottom/Right Glow
-        @window.draw_triangle(hw, hh, Gosu::Color::WHITE, @width, hh, Gosu::Color::NONE, hw, @height, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        @window.draw_triangle(hw, hh, Gosu::Color::WHITE, 
+                              @width, hh, Gosu::Color::NONE, 
+                              hw, @height, Gosu::Color::NONE, 
+                              ZOrder::BALL_GLOW)
         # Bottom/Left Glow
-        @window.draw_triangle(-hw, hh, Gosu::Color::WHITE, -hw, @height, Gosu::Color::NONE, -@width, hh, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        @window.draw_triangle(-hw, hh, Gosu::Color::WHITE, 
+                              -hw, @height, Gosu::Color::NONE, 
+                              -@width, hh, Gosu::Color::NONE, 
+                              ZOrder::BALL_GLOW)
         # Top/Left Glow
-        @window.draw_triangle(-hw, -hh, Gosu::Color::WHITE, -@width, -hh, Gosu::Color::NONE, -hw, -@height, Gosu::Color::NONE, ZOrder::BALL_GLOW)
+        @window.draw_triangle(-hw, -hh, Gosu::Color::WHITE, 
+                              -@width, -hh, Gosu::Color::NONE, 
+                              -hw, -@height, Gosu::Color::NONE, 
+                              ZOrder::BALL_GLOW)
       end
     end
   end
