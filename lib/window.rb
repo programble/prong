@@ -37,6 +37,6 @@ class GameWindow < Gosu::Window
     
     @ball.draw
     
-    @framerate = 60 / (Time.new - frame_start) / 1000 if @frames % @framerate.round == 0
+    @framerate = 60 / (Time.new - frame_start) / 1000 if @frames % @framerate.ceil == 0
   end
 end
