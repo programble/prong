@@ -40,11 +40,11 @@ class Ball < Rectangle
     @y += Gosu::offset_y(@angle, @speed)
     
     # Top/Bottom collision
-    if Gosu::distance(@x, @y, @x, 0) <= @speed || Gosu::distance(@x, @y, @x, @window.height) <= @speed
+    if @y <= @speed || @window.height - @y <= @speed
       @angle = 180 - @angle
     end
     # FIXME: Remove Testing Code
-    if Gosu::distance(@x, @y, 0, @y) <= @speed || Gosu::distance(@x, @y, @window.width, @y) <= @speed
+    if @x <= @speed || @window.width - @x <= @speed
       @angle = 360 - @angle
     end
     
