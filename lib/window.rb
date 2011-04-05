@@ -15,10 +15,11 @@ class GameWindow < Gosu::Window
     @debug_font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     
     @frames = 0
-    @framerate = self.update_interval
+    @framerate = 1
+    @framerate_start = Time.new
     
     @ball = Ball.new(self, 10, 10)
-    @ball.speed = 2.0
+    @ball.speed = 3.0
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
     
@@ -35,7 +36,6 @@ class GameWindow < Gosu::Window
 
   def draw
     @frames += 1
-    frame_start = Time.new
     
     @debug_font.draw("(#{@ball.x.round},#{@ball.y.round}) angle: #{@ball.angle} speed: #{@ball.speed.round(2)}", 0, 0, ZOrder::DEBUG, 1.0, 1.0, Gosu::Color::GREEN)
     
@@ -48,6 +48,10 @@ class GameWindow < Gosu::Window
     @ball.draw
     @player_paddle.draw
     
-    @framerate = 60 / (Time.new - frame_start) / 1000 if @frames % @framerate.ceil == 0
+    if Time.new - @framerate_start >= 1.0
+      @framerate = @frames
+      @frames = 0
+      @framerate_start = Time.new
+    end
   end
 end
