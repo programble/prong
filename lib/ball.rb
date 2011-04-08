@@ -50,7 +50,7 @@ class Ball < Rectangle
     
     # Collide with paddles
     paddles.each do |paddle|
-      if @y > paddle.y - paddle.height / 2 && @y < paddle.y + paddle.height / 2 && Gosu::distance(@x, @y, paddle.x, @y) <= @speed
+      if @y > paddle.y - paddle.height / 2 && @y < paddle.y + paddle.height / 2 && (@x > paddle.x ? @x - (paddle.x + paddle.width / 2) <= @speed : paddle.x - paddle.width / 2 - @x <= @speed)
         @angle = 360 - @angle
       end
     end
