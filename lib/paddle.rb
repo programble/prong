@@ -18,3 +18,9 @@ class Paddle < Rectangle
     @y -= (@y - @destination) * @speed
   end
 end
+
+class PerfectAIPaddle < Paddle
+  def calculate(ball)
+    @destination = ball.y
+  end
+end

@@ -19,19 +19,23 @@ class GameWindow < Gosu::Window
     @framerate_start = Time.new
     
     @ball = Ball.new(self, 10, 10)
-    @ball.speed = 3.0
+    @ball.speed = 2.0
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
     
     @player_paddle = Paddle.new(self, 10, 60, 0.5)
     @player_paddle.warp(20, height / 2)
+    
+    @ai_paddle = PerfectAIPaddle.new(self, 10, 60, 0.5)
+    @ai_paddle.warp(width - 20, height / 2)
   end
 
   def update
-    @ball.move([@player_paddle])
-    #@ball.speed += 0.01
+    @ball.move([@player_paddle, @ai_paddle])
     @player_paddle.destination = mouse_y
     @player_paddle.move
+    @ai_paddle.calculate(@ball)
+    @ai_paddle.move
   end
 
   def draw
@@ -47,6 +51,7 @@ class GameWindow < Gosu::Window
     
     @ball.draw
     @player_paddle.draw
+    @ai_paddle.draw
     
     if Time.new - @framerate_start >= 1.0
       @framerate = @frames
