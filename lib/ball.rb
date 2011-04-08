@@ -50,6 +50,9 @@ class Ball < Rectangle
     
     # Collide with paddles
     paddles.each do |paddle|
+      if @x > paddle.left && @x < paddle.right && (@y > paddle.y ? @y - paddle.bottom <= @speed : paddle.top - @y <= @speed)
+        @angle = 180 - @angle
+      end
       if @y > paddle.top && @y < paddle.bottom && (@x > paddle.x ? @x - paddle.right <= @speed : paddle.left - @x <= @speed)
         @angle = 360 - @angle
       end
