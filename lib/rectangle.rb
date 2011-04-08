@@ -16,6 +16,22 @@ class Rectangle
     @x = @y = @angle = 0
   end
   
+  def top
+    @y - @height / 2
+  end
+  
+  def bottom
+    @y + @height / 2
+  end
+  
+  def left
+    @x - @width / 2
+  end
+  
+  def right
+    @x + @width / 2
+  end
+  
   def warp(x, y)
     @x, @y = x, y
   end
