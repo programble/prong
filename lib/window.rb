@@ -12,6 +12,7 @@ class GameWindow < Gosu::Window
     self.caption = "Prong"
     
     @fps_font = Gosu::Font.new(self, Gosu::default_font_name, 15)
+    @score_font = Gosu::Font.new(self, File.join(File.dirname(__FILE__), '..', 'media', 'imagine_font.ttf'), 40)
     @debug_font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     
     @frames = 0
@@ -23,10 +24,10 @@ class GameWindow < Gosu::Window
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
     
-    @player_paddle = Paddle.new(self, 10, 60, 0.5)
+    @player_paddle = Paddle.new(self, 10, 60, 0.25)
     @player_paddle.warp(20, height / 2)
     
-    @ai_paddle = PerfectAIPaddle.new(self, 10, 60, 0.5)
+    @ai_paddle = PerfectAIPaddle.new(self, 10, 60, 0.125)
     @ai_paddle.warp(width - 20, height / 2)
   end
 
@@ -48,6 +49,9 @@ class GameWindow < Gosu::Window
     
     fps = "#{@framerate.round} FPS"
     @fps_font.draw(fps, width - @fps_font.text_width(fps), 0, ZOrder::FPS, 1.0, 1.0, Gosu::Color::WHITE)
+    
+    @score_font.draw(@player_paddle.score.to_s, width / 2 - 10 - @score_font.text_width(@player_paddle.score.to_s), 10, ZOrder::SCORE, 1.0, 1.0, Gosu::Color::WHITE)
+    @score_font.draw(@ai_paddle.score.to_s, width / 2 + 10, 10, ZOrder::SCORE, 1.0, 1.0, Gosu::Color::WHITE)
     
     @ball.draw
     @player_paddle.draw

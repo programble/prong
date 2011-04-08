@@ -6,11 +6,12 @@ require 'rubygems'
 require 'gosu'
 
 class Paddle < Rectangle
-  attr_accessor :destination
+  attr_accessor :destination, :score
   
   def initialize(window, width, height, speed)
     super(window, width, height, Gosu::Color::WHITE, ZOrder::PADDLE, true, ZOrder::PADDLE_GLOW)
     @speed = speed
+    @score = 0
     @destination = 0
   end
   
