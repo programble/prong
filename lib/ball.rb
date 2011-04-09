@@ -22,6 +22,7 @@ class Ball < Rectangle
 
   def initialize(window, width, height)
     super(window, width, height, Gosu::Color::WHITE, ZOrder::BALL, true, ZOrder::BALL_GLOW)
+    @speed = 0.0
     @blurs = DropArray.new(4)
   end
   

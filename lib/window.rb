@@ -23,7 +23,6 @@ class GameWindow < Gosu::Window
     @debug_font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     
     @ball = Ball.new(self, 10, 10)
-    @ball.speed = 2.0
     @ball.angle = 45
     @ball.warp(width / 2.0, height / 2.0)
     
@@ -32,6 +31,10 @@ class GameWindow < Gosu::Window
     
     @ai_paddle = PerfectAIPaddle.new(self, 10, 60, 0.125)
     @ai_paddle.warp(width - 20, height / 2)
+  end
+  
+  def serve
+    @ball.speed = 2.0 if @ball.speed == 0.0
   end
 
   def update
@@ -44,6 +47,8 @@ class GameWindow < Gosu::Window
   
   def button_down(id)
     case id
+    when Gosu::Button::MsLeft
+      serve
     when Gosu::Button::KbEscape
       close
     when Gosu::Button::KbF2
