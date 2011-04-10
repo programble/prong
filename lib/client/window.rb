@@ -19,7 +19,7 @@ class GameWindow < Gosu::Window
     @debug = false
     
     @fps_font = Gosu::Font.new(self, Gosu::default_font_name, 15)
-    @score_font = Gosu::Font.new(self, File.join(File.dirname(__FILE__), '..', 'media', 'imagine_font.ttf'), 40)
+    @score_font = Gosu::Font.new(self, File.join(File.dirname(__FILE__), '..', '..', 'media', 'imagine_font.ttf'), 40)
     @debug_font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     
     @ball = Ball.new(self, 10, 10)
