@@ -24,6 +24,12 @@ class Ball < Rectangle
     super(window, width, height, Gosu::Color::WHITE, ZOrder::BALL, true, ZOrder::BALL_GLOW)
     @speed = 0.0
     @blurs = DropArray.new(4)
+    center
+  end
+  
+  def center
+    @x = @window.width / 2
+    @y = @window.height / 2
   end
   
   def move(paddles)
@@ -45,8 +51,15 @@ class Ball < Rectangle
       @angle = 180 - @angle
     end
     # FIXME: Remove Testing Code
-    if @x <= @speed || @window.width - @x <= @speed
+    #if @x <= @speed || @window.width - @x <= @speed
+    #  @angle = 360 - @angle
+    #end
+    
+    if @x <= @speed
+      paddles.last.score += 1
       @angle = 360 - @angle
+      @speed = 0.0
+      center
     end
     
     # Collide with paddles
