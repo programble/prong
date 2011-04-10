@@ -15,6 +15,8 @@ module Prong
         
         @socket = UDPSocket.new
         @host, @port = host, port
+        
+        @clients = {}
       end
       
       def bind
@@ -28,6 +30,14 @@ module Prong
         @logger.info "Bound to #{@host}:#{@port}"
       end
       
+      def send(addr, packet)
+        @socket.send(packet, 0, addr[2], addr[1])
+      end
+      
+      def reject_connection(sender)
+        send(sender, [Protocol::Replies::CONNECTION_REJECTED, Protocol::VERSION].pack('n n'))
+      end
+      
       def run
         while true
           begin
@@ -38,6 +48,21 @@ module Prong
             return
           end
           @logger.debug "#{sender} - #{packet.inspect}"
+          
+          command = packet.unpack('n')
+          
+          # Ignore commands from unconnected users
+          if !@clients.include?(sender) && command != Protocol::Commands::CONNECT
+            @logger.warn "Received #{packet.inspect} from unconnected client #{sender}"
+            next
+          elsif command == Protocol::Commands::CONNECT
+            command, protocol_version, name = packet.unpack('n n Z*')
+            if protocol_version != Protocol::VERSION
+              @logger.info "Client rejected: #{sender} '#{name}' #{protocol_version}"
+              reject_connection(sender)
+              next
+            end
+          end
         end
       end
       

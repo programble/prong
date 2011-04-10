@@ -7,15 +7,6 @@ Client:
     CONNECT protocol_version name
     n n Z*
 
-### On matching `protocol_version`
-
-Server:
-
-    CONNECTION_ACCEPTED protocol_version
-    n n
-
-The client should then be put in the "waiting" state.
-
 ### On wrong `protocol_version`
 
 Server:
@@ -24,6 +15,15 @@ Server:
     n n
 
 The server should send nothing else to the client afterwards.
+
+### On matching `protocol_version`
+
+Server:
+
+    CONNECTION_ACCEPTED protocol_version
+    n n
+
+The client should then be put in the "waiting" state.
 
 ## Waiting State
 
