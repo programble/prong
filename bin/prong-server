@@ -8,11 +8,8 @@ port = ARGV[1] ? ARGV[1].to_i : 6854
 
 server = Prong::Server::Server.new(host, port)
 server.bind || exit(1)
-server.start
-
-# Idle loop
 begin
-  STDIN.gets while true
+  server.start.join
 rescue Interrupt
   server.stop
 end

@@ -29,8 +29,14 @@ module Prong
       
       def run
         while true
-          packet, sender = @socket.recvfrom(65536)
-          @logger.debug "#{sender}: #{packet}"
+          begin
+            packet, sender = @socket.recvfrom(65536)
+          rescue Exception => e
+            @logger.fatal "Recvfrom failed: #{e}"
+            @logger << e.backtrace.join("\n")
+            return
+          end
+          @logger.debug "#{sender} - #{packet.inspect}"
         end
       end
       
