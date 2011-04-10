@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib', 'server'))
+
+require 'server'
+
+host = ARGV[0] || ''
+port = ARGV[1] ? ARGV[1].to_i : 6854
+
+server = Prong::Server::Server.new(host, port)
+server.bind || exit(1)
+server.start
+
+# Idle loop
+begin
+  STDIN.gets while true
+rescue Interrupt
+  server.stop
+end
